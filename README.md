@@ -1,1 +1,2 @@
-# DA_together_project
+# DA 투게더 프로젝트
+## 사용자의 감정 기반 콘텐츠 추천 봇
