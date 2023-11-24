@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledTextarea = styled.textarea`
-    width: calc(100% - 70px);
+    width: calc(50% - 20px);
     ${(props) =>
         props.height &&
         `
         height: ${props.height}px;
     `}
-    padding: 10px;      // 박스 외곽 넓이
-    font-size: 16px;    // 글씨 크기
-    line-height: 20px;  // 줄간격
+    padding: 16px;
+    font-size: 16px;
+    line-height: 20px;
 `;
 
 function TextInput(props) {
