@@ -81,29 +81,21 @@ const ButtonWrapper = styled.p`
 function MainPage(props) {
     const navigate = useNavigate();
     const [textValue, setTextValue] = useState("");
+    const [emotionData, setEmotionData] = useState(null); 
   
     const handleChange = (event) => {
       setTextValue(event.target.value);
     };
   
-    const handleButtonClick = () => {
-      console.log("Button clicked!");
-      navigate('/emotion-analysis');
-    };
-
-
     // 서버 연결시 버전
-    //const handleButtonClick = async() => {
-    //  try {
-        // Axios를 사용하여 입력된 값을 서버로 전송
-    //    await axios.post('http://your-flask-server-url/submit', { userInput: textValue });
-
-        // 페이지 이동
-    //    navigate('/emotion-analysis');
-    //  } catch (error) {
-    //  console.error('Error sending data to server:', error);
-    //  }
-    //};
+    const handleButtonClick = async () => {
+      try {
+        const response = await axios.post('/user_input', { user_input: textValue });
+        setEmotionData(response.data); // 서버 응답으로 받은 데이터를 상태에 설정
+      } catch (error) {
+        console.error('Error sending data to server:', error);
+      }
+    };
 
   
     return (
@@ -127,10 +119,20 @@ function MainPage(props) {
           <TextInput value={textValue} onChange={handleChange} height={100} />
         </TextInputWrapper>
         <ButtonWrapper>
+          {textValue && ( // textValue가 비어있지 않으면 버튼 렌더링
           <Button
             title="분석"
-            onClick={handleButtonClick} />
+            onClick={handleButtonClick}
+          />
+          )}
         </ButtonWrapper>
+
+        <ContentContainer>
+          <Icon src={process.env.PUBLIC_URL + 'images/robot.png'} />
+          <InitialText>
+          {emotionData && emotionData.message} {/* 서버 응답의 메시지 표시 */}
+          </InitialText>
+        </ContentContainer>
       </Wrapper>
     </>
     );
