@@ -1,0 +1,5 @@
+Model Files Uploaded
+- classifier.py : KoBERT 기본 class 설정
+- emotion_model.py : 감정 분류 기능 (pretrained 모델 드라이브에 업로드)
+- generation.py : gpt2로 공감성 발언 생성
+- book.py : 감정, 토픽, 장르에 맞는 책 정보 전달 함수 (+이미지 인코딩)
